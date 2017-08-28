@@ -1,0 +1,109 @@
+We are making an application that the user picks a date in this format Y-M-D.  The application will make 2 api calls on the date selected and the api will return the image from that date and a list of astroids from the date selected and 7 days before.
+
+I will then display the image to the user and I will search through the list of astroid and determin how many astroids are a potentially hazordous and how many kms the astroids missed by.  If we detect one or more hazordious astroids we will display a message saying Potentailly Hazardous Astroids Detected! and list the detected astroids and how close to earth they were in kms.
+
+If no astroids where hazordious than display a message saying no hazordious astroids passed in this timeframe.  Howver here is a list of astroids that did pass earth.  The list will contain all of the astroids and how many kms away they were.  
+
+-------------------------------------------------------------------------------------------
+
+html-
+
+The html will contain an input field and a sumbit function with the text "Choose A Date" (YYYY-MM-DD).
+When the user clicks submit after they input a date we will then display a hero img which will replace the default hero img on the page and under the input field will contain the results from that date.
+
+HERO IMG
+
+ASTROID STATS
+if potentially hazordous list hazordous astroids and thier distact to earth "We detected obnomolisies which may be hazardous, Stay Alert Stay Safe"
+IMPACT IN KMS
+else if list all astroids if no hazordous astroids detected and how close to earth "No dangers detected, Have a wonderful day!"
+
+JS-
+
+I will need an event handler to handle when a user clicks submit.
+
+When the user clicks submit I will call a funtion which will generate two api calls to the nasa astroid api and the nasa img of the day api and I will use $.when. Then when both api calls are successful it will call two functions. The two functions are "Astorid Danger Detector" it's argument will be the first returned response from the "when".  The second function will replace the src on the hero img tag with the returned response of the second argument.  This function will only take one argument which will be the second response object.
+
+"ADD" this function will call HAZORD DETECTOR FUNCTION and store the results in a var. Then this function will call the function named "sentenceBuilder" and pass the hazord detection variable object (HDVO) property called "Hazordious Astroids".  ADD will also call another function "astoidList" that will list the astroids name and thier properties.  Another function ADD will call is "heroImgReplacement" this function will take one argument(secondResponse).
+
+"HDF" function will inspect the results and either return a list of potential hazordious astroids or will return all the astroid if none are detected. This function will also add a new property to the returned object indicating if hazordiuos astroids were found as a boolean. 
+
+"sentenceBuilder" function takes one argument which is the "if hazord or not" boolean.  This function will then display add the text to the hltml depending on what the result is.
+
+"Astroid List" function will take one argument (astroids) which it will get from HDF var. It's sole purpose is to just list the astroids and properties in HTML.  Loop that displays content. 
+
+"HIR" this function takes one argument which is the img of the day response from ADD and replaces the src of the hero tag using the property fromt he response.
+
+The first function will be the astroids api call using ajax. The function the following arguments the start date (YYYY-MM-DD).
+The function will then make the ajax call to the api and when it is done will 
+
+
+
+hazordiousAstorids.hazord_detected
+
+onClickSubmitEvent() {
+	when the api's are done then call add(response1, response2)
+}
+
+function add(astriods, imageoftheday) {
+	var hazordiousAstorids = hdf(astroidResponse);
+	sentenceBuilder(hazordiousAstorids);
+}
+
+function hdf(astriods) {
+	loop that goes through the astiriods;
+	it returns an object with 2 values. THe first value is the list array of astriod objects, the second property is if any hazrod astroids were detected (boolean.)
+}
+
+function senetenceBuilder() {
+	
+}
+
+
+
+---------------------------------------------------------------------------------------------
+
+//When you pass asteriods to this function, the asteriods object is set up like this
+/*
+ {
+     2013-02-12: [
+         {
+             name:'asteroid1'
+             is_potentially_hazardous_asteroid: false
+         },
+        {
+             name:'asteroid2'
+             is_potentially_hazardous_asteroid: true
+         }
+     ]
+ }
+
+*/
+
+//so this first line you are doing this:
+//your are looking inside the "asteroids" object for the date property "2013-02-12". (this should match the date you inputed),
+asteroids["2013-02-12"].forEach(function(asteroid) {
+    //the function ontop will pass the current astriod in the array. you can then access it like so
+    if (asteroid.is_potentially_hazardous_asteroid == true) {
+        //Your checking the current astriod in the loop for "is_potentially_hazardous_asteroid" property
+        console.log('danger');
+    } else {
+        console.log('no danger');
+    }
+});
+------------------------------------------------------------------
+    //this is a promise that data will be produced from asteroidData
+ //    $.when(asteroidData, pictureOfTheDay).then(function(asteroidDataResponse, pictureDayResponse){
+ //    	console.log(pictureDayResponse);
+ //    	var asteroids = asteroidDataResponse[0].near_earth_objects[dateSelected];
+ //    	// console.log(asteroids);
+ //    	nasaApp.hazardousDetector(asteroids);
+ //    }).fail(function(err1, err2){
+ //    console.log(err1, err2)
+	// });
+
+----------------------------------------------------------------------
+picture of the day notes:
+if a user before 1995 then display a picture of pluto with a note saying "no picture recorded for this date".
+
+if the user picks a day in the future display a picture of a ufo with a note saying "Time Travel has not been invented yet."

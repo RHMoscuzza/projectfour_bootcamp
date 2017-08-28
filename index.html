@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="https://fonts.googleapis.com/css?family=Orbitron|Poppins" rel="stylesheet">
+	<link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+	<section class="mainSection" id="mainSection">
+		<header>
+			<h1>Should I Go Outside Today?</h1>
+			<h2>Find out if a hazardous asteroid was reported</h2>
+		</header>
+		<div class="dateSubmit">
+			<label for="dateSelected" class="dateSelectedLabel">Please Select A Date</label>
+			<input type="date" class="dateSelected" required>
+			<a href="#secondSection"><input type="submit" class="submittedDate"></a>
+		</div>
+	</section>
+	<section class="secondSection" id="secondSection">
+		<div class="heroImgContainer">
+			<img src="images/paul-mortfield-2012-lunar-eclipse_large.jpg" class="heroImg" alt="Image of the day from NASA.">
+		</div>
+		<div class="asteroidWarningContainer"></div>
+		<a href="#mainSection" class="redo">Select Another Date</a>
+		<footer>
+			<p>Built and designed by <a href="http://beckah.moscuzza.ca/">Beckah Moscuzza</a> | Powered by NASA API (APOD &amp Asteroids - NeoWs)</p>
+		</footer>
+	</section>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="script/script.js"></script>
+</body>
+</html>
